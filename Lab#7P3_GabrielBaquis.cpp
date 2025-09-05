@@ -128,19 +128,21 @@ void menu(vector<Robot*> &robots) {
 			}else {
 				
 				for (int i = 0; i < robots.size(); i++) {
-					RobotExplorador* re = dynamic_cast<RobotExplorador*>(robots[i]); //valida si es de la clase derivada adecuada
-					if (re && re->necesitaMantenimiento()) {
-						cout << "[MAL ESTADO] " << re->getNombre() << " muchos sensores con baja sensibilidad\n";
-					}else {
-						cout << "[OK] " << re->getNombre() << " no necesita mantenimiento\n";
-					}
+					if (RobotExplorador* re = dynamic_cast<RobotExplorador*>(robots[i])){ //valida si es de la clase derivada adecuada
+						if (re->necesitaMantenimiento()) {
+							cout << "[MAL ESTADO] " << re->getNombre() << " muchos sensores con baja sensibilidad\n";
+						}else {
+							cout << "[OK] " << re->getNombre() << " no necesita mantenimiento\n";
+						}
+					}										
 
-					RobotMecanico* rm = dynamic_cast<RobotMecanico*>(robots[i]);
-					if (rm && rm->sobrecargado()) {
-						cout << "[DESCARGADO] " << re->getNombre() << " tiene bateria baja\n";
-					}else {
-						cout << "[OK] " << re->getNombre() << " no esta sobrecargado\n";
-					}					
+					if (RobotMecanico* rm = dynamic_cast<RobotMecanico*>(robots[i])) {
+						if (rm->sobrecargado()) {
+							cout << "[DESCARGADO] " << rm->getNombre() << " tiene bateria baja\n";
+						}else {
+							cout << "[OK] " << rm->getNombre() << " no esta sobrecargado\n";
+						}
+					}										
 				}
 				cout << endl;
 			}
