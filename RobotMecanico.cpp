@@ -4,7 +4,7 @@ RobotMecanico::RobotMecanico(string n, int b, int p, int potencia, int cant)
 
     string herramienta = " ";
     for (int i = 0; i < cant; i++) {
-        cout << "Herramienta " << "#" << i << ": "; cin >> herramienta;
+        cout << "Herramienta " << "#" << i + 1 << ": "; cin.ignore(); getline(cin, herramienta);
         herramientas.push_back(herramienta);
     }
 }

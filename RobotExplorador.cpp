@@ -13,6 +13,7 @@ RobotExplorador::RobotExplorador(string n, int b, int p, int alcance, int cant)
     for (int i = 0; i < cant; i++) {
         cout << "Tipo sensor: "; cin >> tipo;
         nuevoSen = new Sensor(tipo);
+        sensores.push_back(nuevoSen);
     }
 }
 
@@ -34,7 +35,7 @@ void RobotExplorador::optimizar() {
     }
 
     for (auto s : sensores) {
-        s->mejorarSensibilidad(5 + rand() % 16); // Mejora de sinsibilidad
+        s->mejorarSensibilidad(5 + rand() % 15); // Mejora de sinsibilidad
     }
 
     if (rand() % 10 == 0 && sensores.size() > 1) {
