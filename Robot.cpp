@@ -6,8 +6,12 @@ Robot::Robot(string n, int b, int p)
 
 Robot::~Robot() {}
 
-int Robot::getCapacidad() const {
+int Robot::getCapacidad() {
     return capacidadTotal;
+}
+
+string Robot::getNombre() {
+    return nombre;
 }
 
 void Robot::optimizar() {}

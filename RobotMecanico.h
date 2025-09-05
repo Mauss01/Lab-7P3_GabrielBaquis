@@ -1,8 +1,6 @@
 #pragma once
 #include "Robot.h"
-#include <iostream>
-#include <cstdlib>
-#include <vector>
+#include "utils.h"
 
 class RobotMecanico : public Robot {
     int potenciaHerramientas = 0;

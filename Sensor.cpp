@@ -1,15 +1,24 @@
 #include "Sensor.h"
 #include <cstdlib>
+#include <ctime>
+
+Sensor::~Sensor(){}
 
 Sensor::Sensor(string t) : tipo(t) {
-    sensibilidad = rand() % 101;
+    srand(time(0));
+    sensibilidad = rand() % 100;
 }
 
-string Sensor::getTipo() const { return tipo; }
-int Sensor::getSensibilidad() const { return sensibilidad; }
+string Sensor::getTipo()  { 
+    return tipo; 
+}
+int Sensor::getSensibilidad()  { 
+    return sensibilidad; 
+}
 
 void Sensor::mejorarSensibilidad(int mejora) {
     sensibilidad += mejora;
-    if (sensibilidad > 100)
+    if (sensibilidad > 100) {
         sensibilidad = 100;
+    }
 }

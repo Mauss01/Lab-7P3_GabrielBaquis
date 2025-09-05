@@ -24,10 +24,11 @@ void RobotMecanico::optimizar() {
 
 void RobotMecanico::mostrarEspecificaciones()  {
     vector<int> longitudes;
-    for (auto& h : herramientas)
+    for (auto& h : herramientas) {
         longitudes.push_back(h.length());
+    }
 
-    //float promedio = calcularPromedio(longitudes);
+    float promedio = calcularPromedio(longitudes);
 
     cout << "[Mecanico] " << nombre
         << " | Capacidad: " << capacidadTotal

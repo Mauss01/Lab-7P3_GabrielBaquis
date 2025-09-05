@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <cstdlib>
+#include <vector>
 using namespace std;
 
 class Robot {
@@ -13,7 +15,8 @@ protected:
 public:
     Robot(string , int , int );
     virtual ~Robot();
-    int getCapacidad() const;
+    int getCapacidad();
+    string getNombre();
 
     virtual void optimizar();
     virtual void mostrarEspecificaciones();

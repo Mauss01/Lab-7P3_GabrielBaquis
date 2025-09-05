@@ -4,8 +4,10 @@
 
 void menu() {
 	Robot* robot;
-    int opcion = 0, tipoMec = 0, bat = 0, proce = 0, potHerramientas = 0, cantHerramientas = 0, alcance = 0, cantSen = 0;
+    int opcion = 0, tipoMec = 0, bat = 0, proce = 0, potHerramientas = 0, cantHerramientas = 0, alcance = 0, cantSen = 0, seleccion = 0;
 	string nom = " ", herramienta = " ";
+	vector<Robot*> robots;
+
 	do{
 		cout << "---FABRICA DE ROBOTS---\n";
 		cout << "1. Crear Robot\n";
@@ -31,15 +33,17 @@ void menu() {
 							cout << "Potencia herramientas: "; cin >> potHerramientas;
 							cout << "Cantidad herramientas: "; cin >> cantHerramientas;
 							robot = new RobotMecanico(nom, bat, proce, potHerramientas, cantHerramientas);
-							cout << "Robot Mecanico creado con exito!!\n\n";														
+							cout << "Robot Mecanico \"" << nom << "\" creado con exito!!\n\n";														
+							robots.push_back(robot);
 
 						}else{
 							cout << "Alcance: "; cin >> alcance;
 							cout << "Cantidad de Sensores: "; cin >> cantSen;
 							robot = new RobotExplorador(nom, bat, proce, alcance, cantSen);
-							cout << "Robot Explorador creado con exito!!\n\n";
-						}
+							cout << "Robot Explorador \"" << nom << "\" creado con exito!!\n\n";
+							robots.push_back(robot);
 
+						}
 					}else {
 						cout << "Opcion invalida\n";
 					}
@@ -48,17 +52,41 @@ void menu() {
 				}
 			}else {
 				cout << "Opcion invalida\n";
-			}
-			
+			}			
 
 			menu();
 			break;
 
 		case 2:
+			if (robots.empty()){
+				cout << "\nCrea robots primero para verlos\n";
+			}else {
+				cout << "----ROBOTS----\n";
+				for (int i = 0; i < robots.size(); i++) {
+					cout << i << ". "; robots[i]->mostrarEspecificaciones();
+				}
+				cout << endl;
+			}			
 			menu();
 			break;
 
 		case 3:
+			if (robots.empty()) {
+				cout << "\nCrea robots primero para optimizarlos\n";
+			}else {
+				cout << "----ROBOTS----\n";
+				for (int i = 0; i < robots.size(); i++) {
+					cout << i << ". "; robots[i]->getNombre(); cout << endl;
+				}
+				cout << "Seleccione un robot: "; cin >> seleccion;
+				if (seleccion < 0 && seleccion > robots.size()){
+					cout << "Opcion invalida\n";
+				}else {
+					robots[seleccion]->optimizar();
+					cout << "Robot "; robots[seleccion]->getNombre(); cout << " optimizado correctamente\n";
+				}
+				cout << endl;
+			}
 			menu();
 			break;
 

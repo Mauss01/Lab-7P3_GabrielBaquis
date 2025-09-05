@@ -1,25 +1,46 @@
 #include "RobotExplorador.h"
-#include <iostream>
 #include <map>
-#include <cstdlib>
+#include "utils.h"
+#include "Sensor.h"
 
-RobotExplorador::RobotExplorador(string n, int b, int p, int alcance, vector<Sensor*> s)
-    : Robot(n, b, p), alcanceTerreno(alcance), sensores(s) {
+RobotExplorador::RobotExplorador(string n, int b, int p, int alcance, int cant)
+    : Robot(n, b, p), alcanceTerreno(alcance) {
+
+    Sensor* nuevoSen;
+    string tipo = " ";
+
+    // Creando cada nuevo Sensor
+    for (int i = 0; i < cant; i++) {
+        cout << "Tipo sensor: "; cin >> tipo;
+        nuevoSen = new Sensor(tipo);
+    }
 }
 
 RobotExplorador::~RobotExplorador() {
-    for (auto s : sensores) delete s;
+    for (auto s : sensores) { 
+        delete s; 
+    }
 }
 
 void RobotExplorador::optimizar() {
-    alcanceTerreno += rand() % 31;
-    for (auto s : sensores)
-        s->mejorarSensibilidad(5 + rand() % 16);
+    srand(time(0));
+    int tempCalc = 0;
+    if ((alcanceTerreno += rand() % 30) > 100) {
+        tempCalc = 100 - alcanceTerreno; // En caso se supere el limite
+        alcanceTerreno += tempCalc;
+
+    }else {
+        alcanceTerreno += rand() % 30;
+    }
+
+    for (auto s : sensores) {
+        s->mejorarSensibilidad(5 + rand() % 16); // Mejora de sinsibilidad
+    }
 
     if (rand() % 10 == 0 && sensores.size() > 1) {
-        int idx = rand() % sensores.size();
-        delete sensores[idx];
-        sensores.erase(sensores.begin() + idx);
+        int pos = rand() % sensores.size();
+        delete sensores[pos];
+        sensores.erase(sensores.begin() + pos);
     }
 }
 
@@ -40,20 +61,21 @@ void RobotExplorador::mostrarEspecificaciones()  {
         }
     }
 
-    //float promedio = calcularPromedio(sensibilidades);
+    float promedio = calcularPromedio(sensibilidades);
 
     cout << "[Explorador] " << nombre
         << " | Capacidad: " << capacidadTotal
         << " | Alcance: " << alcanceTerreno << " km"
         << " | Promedio Sensibilidad: " << promedio
-        << " | Sensor más común: " << masComun << endl;
+        << " | Sensor mas comun: " << masComun << endl;
 }
 
 bool RobotExplorador::necesitaMantenimiento()  {
     int criticos = 0;
     for (auto s : sensores) {
-        if (s->getSensibilidad() < 30)
+        if (s->getSensibilidad() < 30) {
             criticos++;
+        }
     }
     return criticos >= 2;
 }

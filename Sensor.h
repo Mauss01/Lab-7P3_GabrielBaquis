@@ -7,8 +7,9 @@ class Sensor {
     int sensibilidad = 0; 
 
 public:
-    Sensor(string tipo);
-    string getTipo() const;
-    int getSensibilidad() const;
+    Sensor(string );
+    ~Sensor();
+    string getTipo();
+    int getSensibilidad();
     void mejorarSensibilidad(int mejora);
 };
