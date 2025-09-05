@@ -124,6 +124,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Lab#7P3_GabrielBaquis.cpp" />
+    <ClCompile Include="Robot.cpp" />
+    <ClCompile Include="RobotExplorador.cpp" />
+    <ClCompile Include="RobotMecanico.cpp" />
+    <ClCompile Include="Sensor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Robot.h" />
+    <ClInclude Include="RobotExplorador.h" />
+    <ClInclude Include="RobotMecanico.h" />
+    <ClInclude Include="Sensor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
